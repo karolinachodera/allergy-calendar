@@ -3,14 +3,21 @@ import "./App.css";
 
 function App() {
   const options = { method: "GET", headers: { accept: "application/json" } };
+  async function fetchData() {
+    try {
+      const response = await fetch(
+        "https://api.tomorrow.io/v4/weather/forecast?location=52.1347,21.0042&apikey=YL6HlKP4wNYwKFmJItCk6AsYWH353kaO",
+        options
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-  fetch(
-    "https://api.tomorrow.io/v4/weather/realtime?location=toronto&apikey=XXX",
-    options
-  )
-    .then((response) => response.json())
-    .then((response) => console.log(response))
-    .catch((err) => console.error(err));
+  fetchData();
+
   return (
     <div className="App">
       <header className="App-header">
